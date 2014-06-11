@@ -1,4 +1,4 @@
-/**
+package de.klotzsche.playground.test; /**
  * Created by Master on 11.06.2014.
  */
 

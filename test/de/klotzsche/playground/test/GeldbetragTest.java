@@ -1,3 +1,6 @@
+package de.klotzsche.playground.test;
+
+import de.klotzsche.playground.Geldbetrag;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

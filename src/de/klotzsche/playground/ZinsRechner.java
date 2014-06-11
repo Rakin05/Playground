@@ -1,3 +1,5 @@
+package de.klotzsche.playground;
+
 /**
  * Created by Master on 11.06.2014.
  */
