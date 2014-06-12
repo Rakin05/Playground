@@ -1,5 +1,6 @@
 package de.klotzsche.playground;
 
+import javax.swing.*;
 import java.util.Scanner;
 
 /**
@@ -8,12 +9,11 @@ import java.util.Scanner;
 public class NegativPositiv {
 
     public static void main(String[] args){
-        System.out.print("Gib deine Zahl ein und Ich unterscheide, ob positiv oder negativ: ");
-        int eingabe = new Scanner(System.in).nextInt();
+        int eingabe = Integer.valueOf(JOptionPane.showInputDialog(null, "Gib deine Zahl ein!"));
         if(eingabe < 0)
-            System.out.println("Computer sagt...negativ");
+            JOptionPane.showMessageDialog(null, "Computer sagt...negativ");
         else
-            System.out.println("Computer sagt...positiv");
+            JOptionPane.showMessageDialog(null, "Computer sagt...positiv");
     }
 
 }
