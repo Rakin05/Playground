@@ -1,7 +1,6 @@
 package de.klotzsche.playground;
 
 import javax.swing.*;
-import java.util.Scanner;
 
 /**
  * Created by Felix Klotzsche on 12.06.2014.
