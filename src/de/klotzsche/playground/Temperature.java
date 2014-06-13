@@ -56,10 +56,8 @@ public class Temperature {
 
     private void fillTemperatureDifferences(){
         Integer[] temps = temperatures.values().toArray(new Integer[temperatures.values().size()]);
-        Integer[] days = temperatures.keySet().toArray(new Integer[temperatures.keySet().size()]);
-        range(0, temps.length - 1).forEach( i -> {
-            differences.put(Math.abs(temps[i] - temps[i+1]), Arrays.asList(days[i], days[i+1]));
-        });
+        Integer[] days  = temperatures.keySet().toArray(new Integer[temperatures.keySet().size()]);
+        range(0, temps.length - 1).forEach( i -> differences.put(Math.abs(temps[i] - temps[i+1]), Arrays.asList(days[i], days[i+1])) );
     }
 
     public void printGreatestTemperatureDifference(){
@@ -77,6 +75,4 @@ public class Temperature {
         t.printDaysTemperatures();
         t.printGreatestTemperatureDifference();
     }
-
-
 }
