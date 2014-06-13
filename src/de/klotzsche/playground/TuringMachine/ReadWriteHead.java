@@ -23,10 +23,10 @@ public class ReadWriteHead {
     }
     private void setupSymbolTable(){
         this.symbolTable.put('>', () -> {
-            position += 1; if(position > MAX_POSITION) position = 0;
+            // does nothing currently
         });
         this.symbolTable.put('<', () -> {
-            position -= 1; if(position < 0) position = MAX_POSITION;
+            // does nothing currently
         });
         this.symbolTable.put('+', () -> tape.incrementValue());
         this.symbolTable.put('-', () -> tape.decrementValue());
