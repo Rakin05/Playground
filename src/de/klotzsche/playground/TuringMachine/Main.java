@@ -9,6 +9,8 @@ public class Main {
         char[] sourceCode = {'#', '+', '#', '+', '#'};
         Machine m = new Machine(sourceCode);
 
+        System.out.println('a' + 1);
+
         m.run();
     }
 

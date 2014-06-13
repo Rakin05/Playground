@@ -8,8 +8,11 @@ import java.util.Map;
  */
 public class Machine {
 
-    private int currentValue = 0;
+    private int head = 0;
+
     private char[] sourceCode;
+    private char[] band = {'a','a','a','a','a','a','a','a','a','a'};
+
     private Map<Character, Command> symbolTable;
 
     public Machine(char[] sourceCode) {
@@ -21,11 +24,18 @@ public class Machine {
     }
 
     private void setupSymbolTable(){
-        this.symbolTable.put('>', () -> {/*does nothing currently*/});
-        this.symbolTable.put('<', () -> {/*does nothing currently*/ });
-        this.symbolTable.put('+', () -> currentValue += 1);
-        this.symbolTable.put('-', () -> currentValue -= 1);
-        this.symbolTable.put('#', () -> System.out.println((char) ('a' + currentValue)));
+        this.symbolTable.put('>', () -> { // move the head one position one place forward
+            if (head == sourceCode.length) head = 0;
+            else head += 1;
+            System.out.println(head);
+        });
+        this.symbolTable.put('<', () -> { // move the head one position one place backward
+            if (head < 0) head = sourceCode.length - 1;
+            else head -= 1;
+        });
+        this.symbolTable.put('+', () -> band[head] += 1 );
+        this.symbolTable.put('-', () -> band[head] -= 1 );
+        this.symbolTable.put('#', () -> System.out.println(band[head]));
     }
 
     public void run() {

@@ -1,6 +1,6 @@
 package de.klotzsche.playground;
 
-import java.util.stream.IntStream;
+import static java.util.stream.IntStream.range;
 
 /**
  * Created by Felix Klotzsche on 12.06.2014.
@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 public class H4X0R {
 
     public static void main(String[] args) {
-        IntStream.range(42, 100).filter(H4X0R::checkPasscode).forEach(System.out::println);
+        range(42, 1000).filter(H4X0R::checkPasscode).forEach(System.out::println);
     }
 
     public static boolean checkPasscode(int H4X0R) {
