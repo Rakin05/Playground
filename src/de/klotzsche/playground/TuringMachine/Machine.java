@@ -25,13 +25,10 @@ public class Machine {
 
     private void setupSymbolTable(){
         this.symbolTable.put('>', () -> { // move the head one position one place forward
-            if (head == band.length) head = 0;
-            else head += 1;
-            System.out.println(head);
+            if (head == band.length) head = 0; else head += 1;
         });
         this.symbolTable.put('<', () -> { // move the head one position one place backward
-            if (head < 0) head = band.length - 1;
-            else head -= 1;
+            if (head < 0) head = band.length - 1; else head -= 1;
         });
         this.symbolTable.put('+', () -> band[head] += 1 );
         this.symbolTable.put('-', () -> band[head] -= 1 );
