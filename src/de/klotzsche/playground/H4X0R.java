@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 public class H4X0R {
 
     public static void main(String[] args) {
-        IntStream.range(42, 100).filter(i -> checkPasscode(i)).forEach(System.out::println);
+        IntStream.range(42, 100).filter(H4X0R::checkPasscode).forEach(System.out::println);
     }
 
     public static boolean checkPasscode(int H4X0R) {
