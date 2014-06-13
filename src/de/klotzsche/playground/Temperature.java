@@ -39,7 +39,11 @@ public class Temperature {
     }
 
     public double getAverageTemperature(){
-        return temperatures.values().stream().mapToDouble(Integer::intValue).average().getAsDouble();
+        return temperatures.values().stream()
+                .parallel()
+                .mapToDouble(Integer::intValue)
+                .average()
+                .getAsDouble();
     }
 
     public int getMinTemperature(){
@@ -51,13 +55,15 @@ public class Temperature {
     }
 
     public void printDaysTemperatures(){
-        temperatures.keySet().stream().forEach( i -> printDayTemperature(i, temperatures.get(i)));
+        temperatures.keySet().stream().parallel().forEach( i -> printDayTemperature(i, temperatures.get(i)));
     }
 
     private void fillTemperatureDifferences(){
         Integer[] temps = temperatures.values().toArray(new Integer[temperatures.values().size()]);
         Integer[] days  = temperatures.keySet().toArray(new Integer[temperatures.keySet().size()]);
-        range(0, temps.length - 1).forEach( i -> differences.put(Math.abs(temps[i] - temps[i+1]), Arrays.asList(days[i], days[i+1])) );
+        range(0, temps.length - 1)
+                .parallel()
+                .forEach( i -> differences.put(Math.abs(temps[i] - temps[i+1]), Arrays.asList(days[i], days[i+1])) );
     }
 
     public void printGreatestTemperatureDifference(){
@@ -69,6 +75,7 @@ public class Temperature {
 
     public static void main(String[] args){
         Temperature t = new Temperature();
+
         System.out.println(t.getAverageTemperature());
         System.out.println(t.getMinTemperature());
 
