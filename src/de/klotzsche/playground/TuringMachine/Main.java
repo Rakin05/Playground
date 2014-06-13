@@ -9,7 +9,7 @@ public class Main {
         char[] sourceCode = {'#', '+', '#', '+', '#'};
         Machine m = new Machine(sourceCode);
 
-        m.start();
+        m.run();
     }
 
 }
