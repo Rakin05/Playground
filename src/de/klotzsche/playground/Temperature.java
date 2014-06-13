@@ -3,6 +3,8 @@ package de.klotzsche.playground;
 import java.util.*;
 import java.util.stream.IntStream;
 
+import static java.util.stream.IntStream.*;
+
 /**
  * Created by Felix on 13.06.2014.
  */
@@ -53,12 +55,10 @@ public class Temperature {
     }
 
     private void fillTemperatureDifferences(){
-        IntStream.range(0, temperatures.values().size() - 1).forEach( i -> {
-            int temp1 = (int) temperatures.values().toArray()[i];
-            int temp2 = (int) temperatures.values().toArray()[i + 1];
-            int day1  = (int) temperatures.keySet().toArray()[i];
-            int day2  = (int) temperatures.keySet().toArray()[i + 1];
-            differences.put(Math.abs(temp1 - temp2), Arrays.asList(day1, day2));
+        Integer[] temps = temperatures.values().toArray(new Integer[temperatures.values().size()]);
+        Integer[] days = temperatures.keySet().toArray(new Integer[temperatures.keySet().size()]);
+        range(0, temps.length - 1).forEach( i -> {
+            differences.put(Math.abs(temps[i] - temps[i+1]), Arrays.asList(days[i], days[i+1]));
         });
     }
 
@@ -66,7 +66,7 @@ public class Temperature {
         int greatestDifference = Collections.max(differences.keySet());
         int day1 = (int) differences.get(greatestDifference).toArray()[0];
         int day2 = (int) differences.get(greatestDifference).toArray()[1];
-        System.out.printf("Größter Temperaturunterschied von %d °C zwischen Tag %d und %d", greatestDifference, day1+1, day2+1);
+        System.out.printf("Größter Temperaturunterschied von %d °C zwischen Tag %d und %d", greatestDifference, day1, day2);
     }
 
     public static void main(String[] args){
