@@ -8,8 +8,7 @@ import java.util.Random;
 public class FourtyTwoPercent {
 
     public static void main(String[] args){
-        Random rd = new Random();
-        int number = rd.nextInt(100);
+        int number = new Random().nextInt(100);
 
         if(number > 42)
             System.out.println("Du hast gewonnen...");
