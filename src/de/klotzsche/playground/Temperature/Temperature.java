@@ -1,9 +1,7 @@
 package de.klotzsche.playground.Temperature;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static java.util.stream.IntStream.range;
