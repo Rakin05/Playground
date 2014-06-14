@@ -5,9 +5,9 @@ package de.klotzsche.playground.Temperature;
  */
 public class TemperatureDifference {
 
-    private int day1;
-    private int day2;
-    private int temperatureDifference;
+    private final int day1;
+    private final int day2;
+    private final int temperatureDifference;
 
     public TemperatureDifference(int temperatureDifference, int day1, int day2) {
         this.temperatureDifference = temperatureDifference;

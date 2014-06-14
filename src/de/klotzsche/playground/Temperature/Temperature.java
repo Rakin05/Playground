@@ -1,6 +1,5 @@
 package de.klotzsche.playground.Temperature;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -12,13 +11,11 @@ import static java.util.stream.IntStream.range;
 public class Temperature {
 
     private final ConcurrentHashMap<Integer, Integer> temperatures;
-    private final ArrayList<TemperatureDifference> differences;
 
     public Temperature() {
         this.temperatures = new ConcurrentHashMap<>();
-        this.differences = new ArrayList<>();
+
         this.setupTemperatures();
-        this.fillTemperatureDifferences();
     }
 
     private void setupTemperatures() {
@@ -57,16 +54,21 @@ public class Temperature {
         temperatures.keySet().stream().parallel().forEach(i -> printDayTemperature(i, temperatures.get(i)));
     }
 
-    private void fillTemperatureDifferences() {
-        Integer[] temps = temperatures.values().toArray(new Integer[temperatures.values().size()]);
-        range(0, temps.length - 1).forEach( i -> differences.add(new TemperatureDifference(Math.abs(temps[i] - temps[i+1]), i+1 , i +2)));
+    private int biggestDifferenceBetweenTwoDays(){
+        final Integer[] temps = temperatures.values().toArray(new Integer[temperatures.values().size()]);
+        return range(0, temps.length - 1)
+                .map( i -> Math.abs(temps[i] - temps[i+1]))
+                .parallel()
+                .max().getAsInt();
     }
 
     public void printGreatestTemperatureDifference() {
-        int biggestDifference = differences.stream().mapToInt(diff -> diff.getDifference()).max().getAsInt(); // get the greatest difference
-        differences.stream()
-                .filter( diff -> diff.getDifference() == biggestDifference)
-                .forEach(System.out::println); // filter all the difference and print each
+        final Integer[] temps = temperatures.values().toArray(new Integer[temperatures.values().size()]);
+        range(0, temps.length - 1)
+                .mapToObj( i -> new TemperatureDifference(Math.abs(temps[i] - temps[i+1]),i+1, i+2))
+                .parallel()
+                .filter(tp -> tp.getDifference() == biggestDifferenceBetweenTwoDays())
+                .forEach(System.out::println);
     }
 
     public static void main(String[] args) {
