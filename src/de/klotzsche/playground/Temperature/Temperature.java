@@ -64,7 +64,9 @@ public class Temperature {
 
     public void printGreatestTemperatureDifference() {
         int biggestDifference = differences.stream().mapToInt(diff -> diff.getDifference()).max().getAsInt(); // get the greatest difference
-        differences.stream().filter( diff -> diff.isExactlyDifferent(biggestDifference )).forEach(System.out::println); // filter all the difference and print each
+        differences.stream()
+                .filter( diff -> diff.getDifference() == biggestDifference)
+                .forEach(System.out::println); // filter all the difference and print each
     }
 
     public static void main(String[] args) {

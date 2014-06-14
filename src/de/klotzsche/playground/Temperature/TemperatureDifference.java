@@ -19,10 +19,6 @@ public class TemperatureDifference {
         return this.temperatureDifference;
     }
 
-    public boolean isExactlyDifferent(int difference){
-        return this.temperatureDifference == difference;
-    }
-
     @Override
     public String toString(){
         return String.format("Größter Unterschied von %d °C zwischen Tag %d und %d", temperatureDifference, day1, day2);
