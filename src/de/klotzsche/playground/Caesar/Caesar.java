@@ -36,12 +36,12 @@ public class Caesar {
         return Files.lines(p);
     }
 
-
     public static void main(String[] args) throws Exception{
-
+        // Just grab the Password to cipher
         System.out.print("Gib das Paswort ein: ");
         int password = new Scanner(System.in).nextInt();
 
+        // get The Stuff going...should be obvious, what it's doing
         readLinesFromFile("resource/quote.txt")
              .map(String::toLowerCase)
              .map(Caesar::removeAllNonAlphabetics)
