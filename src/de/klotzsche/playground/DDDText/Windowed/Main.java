@@ -23,10 +23,6 @@ public class Main extends Application {
         return new Scanner(System.in).nextLine();
     }
 
-    private void setStyles(Scene s){
-
-    }
-
     @Override
     public void start(Stage primaryStage) throws Exception {
         final String text = this.getText();
