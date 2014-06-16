@@ -21,7 +21,6 @@ public class Caesar {
 
     public static String cipherByPassword(String s, int amount){
         return s.chars()
-                .parallel()
                 .filter(c -> Character.isAlphabetic(c) || Character.isWhitespace(c)) // filter all values, that are not Characters or Whitespace
                 .map( c -> c + amount)                // shift the character by amount -> e.g. a + 10 = k
                 .mapToObj( c -> Character.toChars(c)) // Construct a new Character containing the shifted value
@@ -36,7 +35,6 @@ public class Caesar {
 
         // get The Stuff going...should be obvious, what it's doing
         readLinesFromFile("resource/quote.txt")
-             .parallel()
              .map(String::toLowerCase)
              .map(s -> Caesar.cipherByPassword(s, password))
              .forEach(System.out::println);
