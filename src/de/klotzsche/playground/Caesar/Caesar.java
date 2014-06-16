@@ -1,13 +1,11 @@
 package de.klotzsche.playground.Caesar;
 
-import java.io.File;
-import java.io.RandomAccessFile;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.Collections;
+import java.nio.file.attribute.FileAttribute;
+import java.nio.file.attribute.PosixFileAttributes;
+import java.nio.file.attribute.PosixFilePermissions;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
@@ -18,9 +16,8 @@ import static java.util.stream.Collectors.joining;
  */
 public class Caesar {
 
-
     private static Stream<String> readLinesFromFile(String filename) throws Exception{
-        Path p = FileSystems.getDefault().getPath(filename);
+        final Path p = FileSystems.getDefault().getPath(filename);
         return Files.lines(p);
     }
 
@@ -34,20 +31,22 @@ public class Caesar {
     }
 
     public static void WriteCryptedToFile(String filename, String contents) throws Exception{
-        Files.write(FileSystems.getDefault().getPath(filename), contents.getBytes());
+        final Path fullFileName = FileSystems.getDefault().getPath(filename);
+        Files.deleteIfExists(fullFileName);
+        Files.createFile(fullFileName);
+        Files.write(fullFileName, contents.getBytes());
     }
 
     public static void main(String[] args) throws Exception{
         // Just grab the Password to cipher
         System.out.print("Gib das Paswort ein: ");
-        int password = new Scanner(System.in).nextInt();
+        final int password = new Scanner(System.in).nextInt();
 
         // get The Stuff going...should be obvious, what it's doing
         final String cipheredContents = readLinesFromFile("resource/quote.txt")
                                             .map(String::toLowerCase)
                                             .map(s -> Caesar.cipherByPassword(s, password))
                                             .collect(joining());
-
         Caesar.WriteCryptedToFile("resource/ciphered_quote.txt", cipheredContents);
     }
 

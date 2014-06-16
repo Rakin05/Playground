@@ -1,6 +1,7 @@
 package de.klotzsche.playground.Temperature;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static java.util.stream.IntStream.range;
@@ -10,10 +11,10 @@ import static java.util.stream.IntStream.range;
  */
 public class Temperature {
 
-    private final ConcurrentHashMap<Integer, Integer> temperatures;
+    private final HashMap<Integer, Integer> temperatures;
 
     public Temperature() {
-        this.temperatures = new ConcurrentHashMap<>();
+        this.temperatures = new HashMap<>();
 
         this.setupTemperatures();
     }
