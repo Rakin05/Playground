@@ -1,8 +1,13 @@
 package de.klotzsche.playground.Caesar;
 
+import java.io.File;
+import java.io.RandomAccessFile;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
@@ -22,10 +27,14 @@ public class Caesar {
     public static String cipherByPassword(String s, int amount){
         return s.chars()
                 .filter(c -> Character.isAlphabetic(c) || Character.isWhitespace(c)) // filter all values, that are not Characters or Whitespace
-                .map( c -> c + amount)                // shift the character by amount -> e.g. a + 10 = k
-                .mapToObj( c -> Character.toChars(c)) // Construct a new Character containing the shifted value
-                .map(c -> String.valueOf(c))          // Convert back to String
+                .map(c -> c + amount)                // shift the character by amount -> e.g. a + 10 = k
+                .mapToObj(Character::toChars)         // Construct a new Character containing the shifted value
+                .map(String::valueOf)                 // Convert back to String
                 .collect(joining());                  // Return a String instead of ReferencePipeline
+    }
+
+    public static void WriteCryptedToFile(String filename, String contents) throws Exception{
+        Files.write(FileSystems.getDefault().getPath(filename), contents.getBytes());
     }
 
     public static void main(String[] args) throws Exception{
@@ -34,10 +43,12 @@ public class Caesar {
         int password = new Scanner(System.in).nextInt();
 
         // get The Stuff going...should be obvious, what it's doing
-        readLinesFromFile("resource/quote.txt")
-             .map(String::toLowerCase)
-             .map(s -> Caesar.cipherByPassword(s, password))
-             .forEach(System.out::println);
+        final String cipheredContents = readLinesFromFile("resource/quote.txt")
+                                            .map(String::toLowerCase)
+                                            .map(s -> Caesar.cipherByPassword(s, password))
+                                            .collect(joining());
+
+        Caesar.WriteCryptedToFile("resource/ciphered_quote.txt", cipheredContents);
     }
 
 }
