@@ -28,7 +28,6 @@ public class Hangman {
         runHangMan();
 
         System.out.println(word);
-        System.out.println("Haste gewonnen...Guter Junge");
     }
 
     private static void runHangMan(){
@@ -40,7 +39,7 @@ public class Hangman {
             }
             tries += 1;
             System.out.println(output);
-            System.out.println("Du hast" + (10 - tries) + " übrig");
+            System.out.println("Du hast " + (10 - tries) + " übrig");
         }
     }
 
