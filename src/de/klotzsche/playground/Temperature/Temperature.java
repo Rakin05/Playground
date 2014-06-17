@@ -1,9 +1,9 @@
 package de.klotzsche.playground.Temperature;
 
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.concurrent.ConcurrentHashMap;
 
+import static java.util.Collections.max;
+import static java.util.Collections.min;
 import static java.util.stream.IntStream.range;
 
 /**
@@ -44,11 +44,11 @@ public class Temperature {
     }
 
     public int getMinTemperature() {
-        return Collections.min(temperatures.values());
+        return min(temperatures.values());
     }
 
     public int getMaxTemperature() {
-        return Collections.min(temperatures.values());
+        return max(temperatures.values());
     }
 
     private void printDayTemperature(int day, int temperature) {
@@ -64,16 +64,16 @@ public class Temperature {
     private int biggestDifferenceBetweenTwoDays(){
         final Integer[] temps = temperatures.values().toArray(new Integer[temperatures.values().size()]);
         return range(0, temps.length - 1)
-                .map( i -> Math.abs(temps[i] - temps[i+1]))
                 .parallel()
+                .map(i -> Math.abs(temps[i] - temps[i + 1]))
                 .max().getAsInt();
     }
 
     public void printGreatestTemperatureDifference() {
         final Integer[] temps = temperatures.values().toArray(new Integer[temperatures.values().size()]);
         range(0, temps.length - 1)
-                .mapToObj( i -> new TemperatureDifference(Math.abs(temps[i] - temps[i+1]),i+1, i+2))
                 .parallel()
+                .mapToObj(i -> new TemperatureDifference(Math.abs(temps[i] - temps[i + 1]), i + 1, i + 2)) // eg NewTemperatureDiffer(5, 2, 3)
                 .filter(tp -> tp.getDifference() == biggestDifferenceBetweenTwoDays())
                 .forEach(System.out::println);
     }
