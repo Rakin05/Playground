@@ -51,11 +51,10 @@ public class Hangman {
         if(word.toLowerCase().indexOf(compare) != -1){
             System.out.println(guessed + " kommt im Wort vor.");
             char[] wortArr = word.toLowerCase().toCharArray();
-            range(0, wortArr.length)
-                    .forEach(i -> {
-                        if (wortArr[i] == compare)
-                            output = changeOutPut(i, compare);
-                    });
+            range(0, wortArr.length).forEach(i -> {
+                if (wortArr[i] == compare)
+                    output = changeOutPut(i, compare);
+            });
         };
         return false;
     }
