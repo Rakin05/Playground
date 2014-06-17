@@ -48,15 +48,17 @@ public class Hangman {
         char guessed = input.charAt(0);
         char compare = input.toLowerCase().charAt(0);
 
-        if(word.toLowerCase().indexOf(compare) != -1){
+        final boolean[] retVal = {false};
+
+        word.chars().filter( i -> i == compare).forEach(c -> {
+            retVal[0] = true;
             System.out.println(guessed + " kommt im Wort vor.");
-            char[] wortArr = word.toLowerCase().toCharArray();
-            range(0, wortArr.length).forEach(i -> {
-                if (wortArr[i] == compare)
-                    output = changeOutPut(i, compare);
-            });
-        };
-        return false;
+            char[] wordArr = word.toLowerCase().toCharArray();
+            range(0, wordArr.length).
+                    filter(i -> wordArr[i] == compare)
+                    .forEach(i -> output = changeOutPut(i, compare));
+        });
+        return retVal[0];
     }
 
     private static String changeOutPut(int i, char compare){
