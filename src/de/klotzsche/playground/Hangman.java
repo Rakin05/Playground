@@ -21,54 +21,61 @@ public class Hangman {
 
     private static Scanner sc = new Scanner(System.in);
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         word = generateRandomString();
         output = word.replaceAll("[A-Za-z]", "_");
 
         runHangMan();
-
-        System.out.println(word);
     }
 
-    private static void runHangMan(){
-        while(tries < 10 && foundSoFar < word.length()){
+    private static void runHangMan() {
+        System.out.println(word);
+        while (tries < 10 && foundSoFar < word.length()) {
             System.out.print("Welchen Buchstaben willst du probieren?: ");
-            if(checkIfInputMatches()){
+            if (checkIfInputMatches()) {
+                // wenn der eingegeben Buchstabe im Wort vorkommt
+                // mach einfach weiter mit der Schleife
                 System.out.println(output);
                 continue;
             }
             tries += 1;
             System.out.println(output);
-            System.out.println("Du hast " + (10 - tries) + " übrig");
+            System.out.println("Du hast " + (10 - tries) + " Versuche übrig");
         }
+
+        if(tries == 10)
+            System.out.println("Haste verloren, wa?" + word + " war es.");
     }
 
-    private static boolean checkIfInputMatches(){
+    private static boolean checkIfInputMatches() {
         String input = sc.nextLine();
-        char guessed = input.charAt(0);
         char compare = input.toLowerCase().charAt(0);
 
-        final boolean[] retVal = {false};
+        boolean found = false;
 
-        word.chars().filter( i -> i == compare).forEach(c -> {
-            retVal[0] = true;
-            System.out.println(guessed + " kommt im Wort vor.");
-            char[] wordArr = word.toLowerCase().toCharArray();
-            range(0, wordArr.length)
-                    .filter(i -> wordArr[i] == compare)
-                    .forEach(i -> { output = changeOutPut(i, compare); retVal[0] = true; });
-        });
-        return retVal[0];
+        // Prüfe, ob der eingegeben Buchstabe im Wort vorkommt
+        // wenn ja, ändere die Ausgabe, sodass der gefundene Buchstabe
+        // angezeigt wird
+        // setze foundSoFar jeweils um 1 hoch...Wenn ein buchstabe mehrmals
+        // vorkommt, dann wird foundSoFar um die jeweilige Anzahl erhöht
+        char[] wordArr = word.toLowerCase().toCharArray();
+        for (int i = 0; i < wordArr.length; i++) {
+            if (wordArr[i] == compare) {
+                foundSoFar += 1;
+                output = changeOutPut(i, compare);
+                found = true;
+            }
+        }
+        return found;
     }
 
-    private static String changeOutPut(int i, char compare){
-        foundSoFar += 1;
+    private static String changeOutPut(int i, char compare) {
         char[] temp = output.toCharArray();
         temp[i] = compare;
         return String.valueOf(temp);
     }
 
-    private static String generateRandomString() throws Exception{
+    private static String generateRandomString() throws Exception {
         Path p = FileSystems.getDefault().getPath("resource/wortlisten");
         List<String> lines = Files.lines(p).collect(toList());
         final int random = new Random().nextInt(lines.size() - 1);
