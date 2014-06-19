@@ -1,7 +1,6 @@
 package de.klotzsche.playground;
 
 import static java.util.stream.IntStream.range;
-import static java.util.stream.IntStream.rangeClosed;
 
 /**
  * Created by Felix Klotzsche on 18.06.2014.
@@ -9,11 +8,11 @@ import static java.util.stream.IntStream.rangeClosed;
 public class Prime {
     public static void main(String[] args) {
         final long now = System.currentTimeMillis();
-        System.out.println("Anzahl Primzahl bis 10: " + howManyPrimeNumbersUpTo(10));
-        System.out.println("Anzahl Primzahl bis 100: " + howManyPrimeNumbersUpTo(100));
-        System.out.println("Anzahl Primzahl bis 1.000: " + howManyPrimeNumbersUpTo(1000));
+        //System.out.println("Anzahl Primzahl bis 10: " + howManyPrimeNumbersUpTo(10));
+        //System.out.println("Anzahl Primzahl bis 100: " + howManyPrimeNumbersUpTo(100));
+        //System.out.println("Anzahl Primzahl bis 1.000: " + howManyPrimeNumbersUpTo(1000));
         System.out.println("Anzahl Primzahl bis 10.000: " + howManyPrimeNumbersUpTo(10000));
-        System.out.println("Anzahl Primzahl bis 100.000: " + howManyPrimeNumbersUpTo(100000));
+        //System.out.println("Anzahl Primzahl bis 100.000: " + howManyPrimeNumbersUpTo(100000));
         //System.out.println("Anzahl Primzahl bis 1.000.000: " + howManyPrimeNumbersUpTo(1000000));
 
         final long now2 = System.currentTimeMillis();
