@@ -1,0 +1,8 @@
+i = 0
+j = 0
+
+solange i kleiner gleich 100
+    und solange j kleiner gleich 100
+        gib aus i*j
+        erhöhe i um 1
+        erhöhe j um 1
